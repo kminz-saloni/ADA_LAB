@@ -2,57 +2,56 @@
 #include <stdlib.h>
 #include <time.h>
 
-// Function to perform Linear Search
-int linearSearch(int array[], int size, int target) {
-    for (int i = 0; i < size; i++) {
-        if (array[i] == target)
-            return i;  // Found the element, return its index
+// Linear Search Function
+int linearSearch(int arr[], int n, int key) {
+    for (int i = 0; i < n; i++) {
+        if (arr[i] == key) {
+            return i;
+        }
     }
     return -1; // Not found
 }
 
-int main() {
-    int size, target;
+int main(void) {
+    int n = 100000;        // Number of elements to search
+    int repeat = 100;      // Number of times to repeat the search
+    int *arr;
+    int key, pos;
+    clock_t start, end;
+    double elapsed = 0.0;
 
-    printf("Enter the number of elements: ");
-    scanf("%d", &size);
-
-    // Allocate memory dynamically for the array
-    int *array = (int *)malloc(size * sizeof(int));
-    if (array == NULL) {
-        printf("Error: Memory allocation failed!\n");
+    // Dynamically allocate array
+    if ((arr = malloc(n * sizeof(int))) == NULL) {
+        fprintf(stderr, "Memory allocation failed\n");
         return 1;
     }
 
-    // Seed random number generator
+    // Seed random generator and fill array with random values
     srand(time(NULL));
-
-    // Generate a random array
-    for (int i = 0; i < size; i++) {
-        array[i] = rand() % 100000; // random number between 0 and 99999
+    for (int i = 0; i < n; i++) {
+        arr[i] = rand() % (n * 2);
     }
 
-    // Choose the last element as the search target (worst-case scenario)
-    target = array[size - 1];
+    // Randomly select an element to search
+    key = arr[rand() % n];
 
-    // Measure execution time for 1000 runs to get an average
-    clock_t start = clock();
+    // Measure search time by repeating the search
+    start = clock();
+    for (int i = 0; i < repeat; i++) {
+        pos = linearSearch(arr, n, key);
+    }
+    end = clock();
 
-    for (int i = 0; i < 1000; i++) {
-        int result = linearSearch(array, size, target);
-        (void)result; // suppress unused variable warning
+    elapsed = (double)(end - start) / CLOCKS_PER_SEC / repeat;
+
+    if (pos >= 0) {
+        printf("Element %d found at index %d\n", key, pos);
+    } else {
+        printf("Element %d not found\n", key);
     }
 
-    clock_t end = clock();
+    printf("Average search time: %lf seconds\n", elapsed);
 
-    // Calculate average time per search
-    double avg_time = ((double)(end - start)) / CLOCKS_PER_SEC / 1000.0;
-
-    printf("\nElement searched: %d\n", target);
-    printf("Average time taken for n = %d: %f seconds per search (over 1000 runs)\n", size, avg_time);
-
-    // Free allocated memory
-    free(array);
-
+    free(arr);
     return 0;
 }

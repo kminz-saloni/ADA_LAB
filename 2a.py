@@ -1,19 +1,23 @@
 import matplotlib.pyplot as plt
 
-n = [10, 50, 100, 500, 1000, 3000, 5000, 6000, 7000]
-time = [0.000012, 0.000020, 0.000032, 0.000106, 0.000269,
-        0.000967, 0.001489, 0.001926, 0.002205]
+# Data from the test cases
+sizes = [100, 1000, 10000, 100000, 1000000]
+times = [0.000000, 0.000008, 0.000060, 0.000320, 0.254000]
 
-plt.figure(figsize=(10, 6))
-plt.plot(n, time, marker='o', color='black', linewidth=2)
-plt.title("Merge Sort: Time vs Number of Elements", fontsize=14, fontweight='bold')
-plt.xlabel("Number of Elements (n)", fontsize=12)
-plt.ylabel("Time Taken (seconds)", fontsize=12)
-plt.grid(True, linestyle='--', alpha=0.6)
+# Plot the data
+plt.plot(sizes, times, marker='o', linestyle='-', color='red')
 
-# Show data values on each point
-for x, y in zip(n, time):
-    plt.text(x, y + 0.00005, f"{y:.6f}", ha='center', fontsize=8)
+# Labels and title
+plt.xlabel('Input Size')
+plt.ylabel('Time Taken (seconds)')
+plt.title('Merge Sort Time vs Input Size')
 
-plt.tight_layout()
+# Use logarithmic scales for better visualization
+plt.xscale('log')
+plt.yscale('log')
+
+# Add grid
+plt.grid(True)
+
+# Display the plot
 plt.show()

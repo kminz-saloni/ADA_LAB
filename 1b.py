@@ -1,18 +1,23 @@
 import matplotlib.pyplot as plt
 
-n_values = [10, 50, 100, 500, 1000, 3000, 5000, 7000, 10000, 20000]
-time_values = [0.00000001, 0.00000001, 0.00000002, 0.00000002, 0.00000003,
-               0.00000003, 0.00000004, 0.00000004, 0.00000004, 0.00000004]
+# Data from the test cases
+sizes = [100, 1000, 10000, 100000, 1000000]
+times = [0.000000, 0.000008, 0.000060, 0.000320, 0.254000]
 
-plt.figure(figsize=(10, 6))
-plt.plot(n_values, time_values, marker='o', linestyle='-', color='red')
-plt.title('Binary Search: Array Size vs Time Taken')
-plt.xlabel('Array Size (n)')
+# Plot the data
+plt.plot(sizes, times, marker='o', linestyle='-', color='red')
+
+# Labels and title
+plt.xlabel('Input Size')
 plt.ylabel('Time Taken (seconds)')
+plt.title('Merge Sort Time vs Input Size')
+
+# Use logarithmic scales for better visualization
+plt.xscale('log')
+plt.yscale('log')
+
+# Add grid
 plt.grid(True)
 
-for n, t in zip(n_values, time_values):
-    plt.text(n, t + 0.0000005, f"{t:.6f}", ha='center', fontsize=8)
-
-plt.tight_layout()
+# Display the plot
 plt.show()

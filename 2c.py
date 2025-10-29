@@ -1,11 +1,23 @@
 import matplotlib.pyplot as plt
 
-input_sizes = [100, 300, 600, 900, 1200, 1500, 1800]
-duration_secs = [0.000173, 0.002334, 0.011884, 0.019764, 0.038526, 0.072840, 0.091639]
+# Data from the test cases
+sizes = [100, 1000, 10000, 100000, 1000000]
+times = [0.00008, 0.00100, 0.02600, 3.883000, 415.277000]
 
-plt.plot(input_sizes, duration_secs, marker='x', color='blue')
-plt.xlabel('Size of Array')
-plt.ylabel('Sorting Duration (seconds)')
-plt.title('Insertion Sort Execution Time')
+# Plot the data
+plt.plot(sizes, times, marker='o', linestyle='-', color='orange')
+
+# Labels and title
+plt.xlabel('Input Size')
+plt.ylabel('Time Taken (seconds)')
+plt.title('Insertion Sort Time vs Input Size')
+
+# Use logarithmic scales for better visualization
+plt.xscale('log')
+plt.yscale('log')
+
+# Add grid
 plt.grid(True)
+
+# Display the plot
 plt.show()

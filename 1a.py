@@ -1,34 +1,23 @@
 import matplotlib.pyplot as plt
 
-# Linear Search Performance Plot
+# Input sizes and corresponding linear search times (in seconds)
+n_values = [1000, 10000, 100000, 1000000, 10000000]
+linear_times_seconds = [0.000002, 0.000027, 0.000308, 0.003087, 0.000022]
 
-# Array sizes (number of elements)
-array_sizes = [10, 50, 100, 500, 1000, 3000, 5000, 6000, 7000, 8000]
+# Convert time values to microseconds for better visualization
+linear_times_micro = [t * 1e6 for t in linear_times_seconds]
 
-# Corresponding average time taken in seconds
-avg_times = [0.000000, 0.000000, 0.000001, 0.000002, 0.000005,
-             0.000013, 0.000019, 0.000023, 0.000026, 0.000028]
+# Plotting the performance graph
+plt.plot(n_values, linear_times_micro, label="Linear Search", marker='o', color='blue')
 
-# Create a new figure with custom dimensions
-plt.figure(figsize=(10, 6))
+# Labeling the axes and adding a title
+plt.xlabel("Number of elements (n)")
+plt.ylabel("Time taken (μs) = microseconds")
+plt.title("Linear Search Performance")
 
-# Plot the data with smooth line and circle markers
-plt.plot(array_sizes, avg_times, marker='o', linestyle='-', color='royalblue', linewidth=2)
+# Display legend and grid
+plt.legend()
+plt.grid(True)
 
-# Add chart title and axis labels
-plt.title("Linear Search Performance: Array Size vs Time Taken", fontsize=14, fontweight='bold')
-plt.xlabel("Array Size (n)", fontsize=12)
-plt.ylabel("Average Time Taken (seconds)", fontsize=12)
-
-# Add grid for better readability
-plt.grid(True, linestyle='--', alpha=0.6)
-
-# Annotate each data point with its value
-for n, t in zip(array_sizes, avg_times):
-    plt.text(n, t + 0.000002, f"{t:.6f}", ha='center', fontsize=8, color='darkblue')
-
-# Adjust layout for cleaner display
-plt.tight_layout()
-
-# Display the plot
+# Show the plot
 plt.show()
